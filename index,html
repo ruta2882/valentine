@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Valentine</title>
+  <title>Valentine 💖</title>
+
   <style>
     body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
       text-align: center;
-      font-family: Arial, sans-serif;
-      background-color: #ffe6eb;
-      margin-top: 100px;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(#ffe6f0, #ffd1dc);
     }
 
     h1 {
       color: #ff3366;
+      margin-top: 80px;
       font-size: 36px;
     }
 
@@ -21,12 +25,12 @@
       border-radius: 12px;
       border: none;
       cursor: pointer;
-      margin: 20px;
     }
 
     #yes {
       background-color: #ff3366;
       color: white;
+      margin-right: 20px;
     }
 
     #no {
@@ -35,34 +39,66 @@
     }
 
     #message {
-      font-size: 30px;
+      display: none;
+      font-size: 28px;
       color: #ff3366;
       margin-top: 40px;
-      display: none;
+    }
+
+    .heart {
+      position: absolute;
+      color: #ff4d6d;
+      font-size: 24px;
+      animation: float 6s infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh); opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
     }
   </style>
 </head>
 
 <body>
 
-  <h1>Shantanu 💖</h1>
+  <h1>Hey Shantanu 💖</h1>
   <h1>Will you be my Valentine?</h1>
 
   <button id="yes" onclick="yesClicked()">Yes Rutuja 💕</button>
   <button id="no" onmouseover="moveNo()">No</button>
 
-  <div id="message">YAY!!! 😍💘 Thank you!!!</div>
+  <div id="message">
+    I knew your answer 😌💘 <br><br>
+    I love you sooo much 💋💕 <br>
+    Come home soon 🏡💖
+  </div>
 
   <script>
     function moveNo() {
       const noBtn = document.getElementById("no");
-      noBtn.style.left = Math.random() * 300 + "px";
-      noBtn.style.top = Math.random() * 300 + "px";
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
     }
 
     function yesClicked() {
       document.getElementById("message").style.display = "block";
     }
+
+    // floating hearts
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 20 + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }, 500);
   </script>
 
 </body>
