@@ -10,51 +10,57 @@
       overflow: hidden;
       text-align: center;
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(#ffe6f0, #ffd1dc);
+      background: linear-gradient(180deg, #ffd1dc, #ffe6f0);
     }
 
     h1 {
-      color: #ff3366;
-      margin-top: 80px;
+      color: #ff2f6e;
+      margin-top: 70px;
       font-size: 36px;
+      z-index: 2;
+      position: relative;
     }
 
     button {
       font-size: 22px;
       padding: 15px 30px;
-      border-radius: 12px;
+      border-radius: 14px;
       border: none;
       cursor: pointer;
+      z-index: 2;
+      position: relative;
     }
 
     #yes {
-      background-color: #ff3366;
+      background-color: #ff2f6e;
       color: white;
-      margin-right: 20px;
     }
 
     #no {
-      background-color: #ddd;
+      background-color: #eee;
       position: absolute;
+      left: 50%;
+      top: 60%;
     }
 
     #message {
       display: none;
       font-size: 28px;
-      color: #ff3366;
-      margin-top: 40px;
+      color: #ff2f6e;
+      margin-top: 30px;
+      z-index: 2;
+      position: relative;
     }
 
-    .heart {
+    .float {
       position: absolute;
-      color: #ff4d6d;
-      font-size: 24px;
-      animation: float 6s infinite;
+      animation: floatUp 8s linear infinite;
+      opacity: 0.8;
     }
 
-    @keyframes float {
-      0% { transform: translateY(100vh); opacity: 1; }
-      100% { transform: translateY(-10vh); opacity: 0; }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh); }
+      100% { transform: translateY(-10vh); }
     }
   </style>
 </head>
@@ -65,40 +71,46 @@
   <h1>Will you be my Valentine?</h1>
 
   <button id="yes" onclick="yesClicked()">Yes Rutuja 💕</button>
-  <button id="no" onmouseover="moveNo()">No</button>
+  <button id="no">No</button>
 
   <div id="message">
-    I knew your answer 😌💘 <br><br>
-    I love you sooo much 💋💕 <br>
-    Come home soon 🏡💖
+    I knew your answer 😌💘<br><br>
+    I love you soooo much 💋💕<br>
+    Come home soon 🏡❤️
   </div>
 
   <script>
-    function moveNo() {
-      const noBtn = document.getElementById("no");
+    // NO button goes CRAZY
+    const noBtn = document.getElementById("no");
+
+    function moveNoCrazy() {
       const x = Math.random() * (window.innerWidth - 100);
       const y = Math.random() * (window.innerHeight - 50);
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
     }
 
+    noBtn.addEventListener("mouseover", moveNoCrazy);
+    noBtn.addEventListener("click", moveNoCrazy);
+
     function yesClicked() {
       document.getElementById("message").style.display = "block";
     }
 
-    // floating hearts
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "💖";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = Math.random() * 20 + 20 + "px";
-      document.body.appendChild(heart);
+    // hearts + balloons
+    const emojis = ["💖","💗","💘","🎈","🎈","🌸","🌹"];
 
-      setTimeout(() => {
-        heart.remove();
-      }, 6000);
-    }, 500);
+    setInterval(() => {
+      const el = document.createElement("div");
+      el.className = "float";
+      el.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.fontSize = Math.random() * 20 + 25 + "px";
+      el.style.animationDuration = Math.random() * 4 + 6 + "s";
+      document.body.appendChild(el);
+
+      setTimeout(() => el.remove(), 9000);
+    }, 300);
   </script>
 
 </body>
